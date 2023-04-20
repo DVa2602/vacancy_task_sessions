@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Session as Session;
+use App\Models\Session;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -27,5 +27,17 @@ class HomeController extends Controller
         return view('home',[
             'sessions'=>Session::whereNotNull('user_id')->get()
         ]);
+    }
+
+    public function clearSession(Session $session)
+    {
+        $session->delete();
+        return redirect()->back();
+    }
+
+    public function clearAllSession()
+    {
+        Session::where('user_id','<>',auth()->user()->id)->delete();
+        return redirect()->back();
     }
 }

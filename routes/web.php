@@ -27,3 +27,5 @@ Auth::routes([
 ]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::delete('/session/{session}/clear', [App\Http\Controllers\HomeController::class, 'clearSession'])->name('clearSession');
+Route::delete('/session/clearAll', [App\Http\Controllers\HomeController::class, 'clearAllSession'])->name('clearAllSession');
