@@ -29,15 +29,17 @@ class HomeController extends Controller
         ]);
     }
 
-    public function clearSession(Session $session)
+    public function clearSession(Request $request ,Session $session)
     {
         $session->delete();
+        $request->session()->flash('status', 'Session user:'.$session->user->name.' closed!');
         return redirect()->back();
     }
 
-    public function clearAllSession()
+    public function clearAllSession(Request $request)
     {
         Session::where('user_id','<>',auth()->user()->id)->delete();
+        $request->session()->flash('status', 'All Session closed!');
         return redirect()->back();
     }
 }
